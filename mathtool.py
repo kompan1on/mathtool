@@ -67,7 +67,7 @@ if a == 0:
     # Линейное уравнение
     if b != 0:
         print("Уравнение линейное")
-        x = round(-c / b, 3) + 0.0
+        x = -c / b
         print(f"x = {x:.3f}")
     else:
         print("ОШИБКА: это не уравнение, неизвестное отсутствует", file=sys.stderr)
@@ -79,12 +79,13 @@ else:
     print(f"D = {d}")
 
     if d > 0:
-        x1 = round((-b + math.sqrt(d)) / (2 * a), 3) + 0.0
-        x2 = round((-b - math.sqrt(d)) / (2 * a), 3) + 0.0
+        x1 = (-b + math.sqrt(d)) / (2 * a)
+        x2 = (-b - math.sqrt(d)) / (2 * a)
         print(f"x1 = {x1:.3f}")
         print(f"x2 = {x2:.3f}")
     elif d == 0:
-        x = round(-b / (2 * a), 3) + 0.0
+        x = -b / (2 * a)
         print(f"x = {x:.3f}")
     else:
         print("Действительных корней нет")
+
