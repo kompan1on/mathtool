@@ -1,6 +1,7 @@
 import sys
 from calc import equation
 from cli import build_parser
+from calc import stats
 
 def hand_solve(args):
     given = [args.a, args.b, args.c]
@@ -18,7 +19,7 @@ def hand_solve(args):
     else:
         raise ValueError("Укажите или все три коэффицента, или ни одного")
 
-    equation.check({"A": a, "B": b, "C": c})
+    equation.solve_check({"A": a, "B": b, "C": c})
     kind, d, roots = equation.solve(a, b, c)
     print(f"Уравнение {kind}")
     if d is not None:
@@ -32,12 +33,42 @@ def hand_solve(args):
         print("Действительных корней нет")
     return 0
 
+def read_num(source):
+
+    values = []
+    for line in source:
+        for word in line.split():
+            try:
+                values.append(float(word))
+            except ValueError:
+                raise ValueError(f"{word} не является числом")
+    return values
+
+def hand_stats(args):
+    if args.input is not None:
+        try:
+            with open(args.input, encoding="utf-8-sig") as handle:
+                values = read_num(handle)
+        except OSError:
+            raise OSError(f"Файл {args.input} не открывается")
+    else:
+        values = read_num(sys.stdin)
+    stats.stats_check(values)
+
+    for lable, function, form in stats.REPORT:
+        value = function(values)
+        if value is None:
+            print(f"{lable}: НЕ СУЩЕСТВУЕТ")
+        else:
+            print(f"{lable}: {value:{form}}")
+    return 0
 
 
 
 
 HANDLERS = {
-    "solve": hand_solve
+    "solve": hand_solve,
+    "stats": hand_stats
 }
 def main(argv):
     parser = build_parser()

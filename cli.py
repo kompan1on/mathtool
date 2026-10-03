@@ -14,4 +14,10 @@ def build_parser():
     p.add_argument("-b", type=int, help="Коэфицент B (целое, по модулю не более 10000)")
     p.add_argument("-c", type=int, help="Коэфицент C (целое, по модулю не более 10000)")
 
+    p = commands.add_parser("stats", allow_abbrev=False,
+                            help="Показатели последовательности")
+    p.add_argument("--input", help="Файл с числами")
+    
+
+
     return parser

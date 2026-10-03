@@ -2,7 +2,7 @@ import math
 
 MAX_VALUE = 10000
 
-def check(coef):
+def solve_check(coef):
 
     for name, value in coef.items():
         if abs(value) > MAX_VALUE:
