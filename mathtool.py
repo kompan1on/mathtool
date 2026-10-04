@@ -2,6 +2,7 @@ import sys
 from calc import equation
 from cli import build_parser
 from calc import stats
+from calc import series
 
 def hand_solve(args):
     given = [args.a, args.b, args.c]
@@ -63,12 +64,25 @@ def hand_stats(args):
             print(f"{lable}: {value:{form}}")
     return 0
 
+def hand_series(args):
+    series.check_params(args.terms, args.eps)
+    term, formula = series.FORMULAS[args.func]
+    if args.terms is not None:
+        res = series.sum_terms(term, args.terms)
+        count = args.terms
+    else:
+        res, count = series.sum_eps(term, args.eps)
+    print(formula)
+    print(f"Слагаемых: {count}")
+    print(f"Сумма ряда: {res:.4f}")
+    return 0
 
 
 
 HANDLERS = {
     "solve": hand_solve,
-    "stats": hand_stats
+    "stats": hand_stats,
+    "series": hand_series
 }
 def main(argv):
     parser = build_parser()
