@@ -3,6 +3,7 @@ from calc import equation
 from cli import build_parser
 from calc import stats
 from calc import series
+from calc import integrate
 
 def hand_solve(args):
     given = [args.a, args.b, args.c]
@@ -77,12 +78,20 @@ def hand_series(args):
     print(f"Сумма ряда: {res:.4f}")
     return 0
 
+def hand_integrate(args):
+    integrate.check_params(args.func, args.start, args.end, args.steps)
+    f, formula, low, high, closed = integrate.FUNCTIONS[args.func]
+    res = integrate.integrate(f, args.start, args.end, args.steps)
 
+    print(formula)
+    print(f"Значение интеграла: {res:.4f}")
+    return 0
 
 HANDLERS = {
     "solve": hand_solve,
     "stats": hand_stats,
-    "series": hand_series
+    "series": hand_series,
+    "integrate": hand_integrate
 }
 def main(argv):
     parser = build_parser()

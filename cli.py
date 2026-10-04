@@ -1,6 +1,6 @@
 import argparse
 from calc import series
-
+from calc import integrate
 def build_parser():
     parser=argparse.ArgumentParser(
         prog="mathtool",
@@ -23,6 +23,10 @@ def build_parser():
     group.add_argument("--terms", type=int, help="Скольуо слагаемых сложить")
     group.add_argument("--eps", type=float, help="Точность: до слагаемого меньше eps")
 
-
-
+    p = commands.add_parser("integrate", allow_abbrev=False, help="Интеграл методом левых прямоугольников")
+    p.add_argument("--func", required=True, choices=sorted(integrate.FUNCTIONS), help="Какую функцию интегрировать")
+    p.add_argument("--from", dest="start", type=float, required=True, help="Нижний предел")
+    p.add_argument("--to", dest="end", type=float, required=True, help="Верхний предел (выше нижнего)")
+    p.add_argument("--steps", type=int, required=True, help="Число прямоугольников (1...100000)")
+    
     return parser
