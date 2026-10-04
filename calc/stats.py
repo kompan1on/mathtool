@@ -9,7 +9,7 @@ def stats_check(values):
     if len(values) > MAX_COUNT:
         raise ValueError(f"Чесел больше чем {MAX_COUNT}")
     for value in values:
-        if not math.isfinite:
+        if not math.isfinite(value):
             raise ValueError(f"{value} не является конечным числом")
         if abs(value) > MAX_VALUE:
             raise ValueError(f"{value} вне допустимого диапазона")
@@ -36,6 +36,20 @@ def sq_sum(values):
 
 def root_mean_sq(values):
     return math.sqrt(sq_sum(values) / len(values))
+
+def sq_sum_dev(values):
+    M = mean(values)
+    res = 0
+    for value in values:
+        res = res + (value - M)**2
+    return res
+
+
+
+def st_dev(values):
+    if len(values)<2:
+        return None
+    return math.sqrt(sq_sum_dev(values)/(len(values)-1))
 
 def variance(values):
     return sq_sum_dev(values)/len(values)
@@ -70,20 +84,6 @@ def positive_count(values):
         if value > 0:
             res += 1
     return res
-
-def sq_sum_dev(values):
-    M = mean(values)
-    res = 0
-    for value in values:
-        res = res + (value - M)**2
-    return res
-
-
-
-def st_dev(values):
-    if len(values)<2:
-        return None
-    return math.sqrt(sq_sum_dev(values)/(len(values)-1))
 
 REPORT = [
     ("Количество",    count,            "d"),

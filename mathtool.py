@@ -15,17 +15,17 @@ def hand_solve(args):
             b = int(input("Введите B: "))
             c = int(input("Введите C: "))
         except ValueError:
-            raise ValueError("Коэффицент не является целым числом")
+            raise ValueError("Коэффициент не является целым числом")
     elif mis == 0:
         a, b, c = args.a, args.b, args.c
     else:
-        raise ValueError("Укажите или все три коэффицента, или ни одного")
+        raise ValueError("Укажите или все три коэффициента, или ни одного")
 
     equation.solve_check({"A": a, "B": b, "C": c})
     kind, d, roots = equation.solve(a, b, c)
     print(f"Уравнение {kind}")
     if d is not None:
-        print(f"Дискриминант {d}")
+        print(f"Дискриминант: {d}")
     if len(roots) == 2:
         print(f"x1 = {roots[0]:.3f}")
         print(f"x2 = {roots[1]:.3f}")
@@ -104,5 +104,6 @@ def main(argv):
         return HANDLERS[args.command](args)
     except (ValueError, OSError) as error:
         print(f"ОШИБКА: {error}", file=sys.stderr)
+        return 1
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

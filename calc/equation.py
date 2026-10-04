@@ -6,14 +6,14 @@ def solve_check(coef):
 
     for name, value in coef.items():
         if abs(value) > MAX_VALUE:
-            raise ValueError(f"Коэффицент {name} вне допустимого диапазона")
+            raise ValueError(f"Коэффициент {name} вне допустимого диапазона")
     if coef["A"]==0 and coef["B"]==0:
         raise ValueError("Это не уравнение")
 
 
 def solve(a, b, c):
 
-    # Решение уравнений и вывод результата
+    # Решение уравнений
     if a == 0:
         x = -c/b
         return "линейное", None, [x]

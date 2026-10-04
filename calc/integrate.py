@@ -21,7 +21,7 @@ def check_params(name, a, b, steps):
 
     for value in (a,b):
         if closed:
-            outside = value <= low or value > high
+            outside = value < low or value > high
         else:
             outside = value <= low or value >= high
         if outside:

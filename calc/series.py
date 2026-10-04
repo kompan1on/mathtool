@@ -7,14 +7,14 @@ MAX_IT=100000
 def check_params(terms, eps):
     if terms is not None:
         if not (1 <= terms <= MAX_TERMS):
-            raise ValueError("Колличество слагаемых вне диапазона")
+            raise ValueError("Количество слагаемых вне диапазона")
     else:
         if not (math.isfinite(eps) and 0 < eps <= MAX_EPS):
             raise ValueError("Точность вне диапазона")
 
 def sign(n):
     if n%2==0:
-        return-1
+        return -1
     else:
         return 1
 
@@ -26,7 +26,7 @@ def term_sqplus(n):
 
 FORMULAS = {
     "third": (term_third, "S = 1/3 - 1/6 + 1/9 - 1/12 + ..."),
-    "sqplus": (term_sqplus, "S = 1/(1^2+1) - 1/(2^2+1) + ...")
+    "sqplus": (term_sqplus, "S = 1/(1^2+1) - 1/(2^2+1) + 1/(3^2+1) + ...")
 
 }
 
