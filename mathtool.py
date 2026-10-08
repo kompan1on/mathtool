@@ -3,7 +3,7 @@ from calc import equation
 from cli import build_parser
 from calc import stats
 from calc import series
-from calc import integrate
+from calc import integration
 
 def hand_solve(args):
     given = [args.a, args.b, args.c]
@@ -79,9 +79,9 @@ def hand_series(args):
     return 0
 
 def hand_integrate(args):
-    integrate.check_params(args.func, args.start, args.end, args.steps)
-    f, formula, low, high, closed = integrate.FUNCTIONS[args.func]
-    res = integrate.integrate(f, args.start, args.end, args.steps)
+    integration.check_params(args.func, args.start, args.end, args.steps)
+    f, formula, low, high, closed = integration.FUNCTIONS[args.func]
+    res = integration.integrate(f, args.start, args.end, args.steps)
 
     print(formula)
     print(f"Значение интеграла: {res:.4f}")
